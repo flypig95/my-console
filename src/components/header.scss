@@ -1,0 +1,18 @@
+.ant-layout-header.header-container {
+    height: 100px;
+    line-height: 100px;
+    font-size: 18px;
+    background-color:#002766;
+    .header-left {
+        float: left;
+    }
+    .header-right {
+        float: right;
+        color: #ffffff;
+        a {
+            color: #ffffff;
+            margin-left: 20px;
+        }
+    }
+}
+
