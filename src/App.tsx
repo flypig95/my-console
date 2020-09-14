@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Router, Route, Switch, matchPath, Link } from 'react-router-dom';
 import { createHashHistory } from 'history';
 import { observer } from 'mobx-react-lite';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import { routers, RouterValue } from './routers';
-import { Layout, Breadcrumb} from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 
 const { Content, Sider } = Layout;
 const history = createHashHistory();
@@ -13,6 +13,12 @@ const history = createHashHistory();
 function App() {
   const [pathname, setPathname] = useState(window.location.hash.split('#')[1]);
 
+  useEffect(() => {
+    history.listen((location, action) => {
+      const _pathname = location.pathname;
+      setPathname(_pathname)
+    })
+  }, [])
 
   const createBreadcrumb = () => {
     const _routers = routers.filter(router => matchPath(pathname, { path: router.path }) && router.path !== '/')
@@ -22,31 +28,31 @@ function App() {
   }
 
   return (
-      <Router history={history}>
-        <Switch>
-            <Layout>
-              <Header />
-              <Layout style={{ margin: '50px auto' }}>
-                <Sider width={180} theme="light" style={{ height: 'fit-content', border: '1px solid #e1e1e1' }} >
-                  <Nav />
-                </Sider>
-                <Layout style={{ width: '1150px', margin: '0 24px 24px', background: '#ffffff', border: '1px solid #e1e1e1' }}>
-                  {createBreadcrumb()}
-                  <Content
-                    style={{
-                      padding: 24,
-                      margin: 0,
-                      minHeight: 600,
-                      background: '#ffffff'
-                    }}
-                  >
-                    {routers.map((router: RouterValue) => <Route exact path={router.path} component={router.component} key={router.path} />)}
-                  </Content>
-                </Layout>
-              </Layout>
+    <Router history={history}>
+      <Switch>
+        <Layout>
+          <Header />
+          <Layout style={{ margin: '50px auto' }}>
+            <Sider width={180} theme="light" style={{ height: 'fit-content', border: '1px solid #e1e1e1' }} >
+              <Nav />
+            </Sider>
+            <Layout style={{ width: '1150px', margin: '0 24px 24px', background: '#ffffff', border: '1px solid #e1e1e1' }}>
+              {createBreadcrumb()}
+              <Content
+                style={{
+                  padding: 24,
+                  margin: 0,
+                  minHeight: 600,
+                  background: '#ffffff'
+                }}
+              >
+                {routers.map((router: RouterValue) => <Route exact path={router.path} component={router.component} key={router.path} />)}
+              </Content>
             </Layout>
-        </Switch>
-      </Router>
+          </Layout>
+        </Layout>
+      </Switch>
+    </Router>
   );
 }
 

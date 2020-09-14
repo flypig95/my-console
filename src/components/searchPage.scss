@@ -1,0 +1,27 @@
+.search-page-container {
+    position: relative;
+
+    .extra-button {
+        position: absolute;
+        top: -72px;
+        right: 0;
+        button {
+            margin-left: 20px;
+        }
+    }
+    form {
+        label {
+            font-size: $font-size;
+        }
+    }
+    .QRcode-wraper {
+        position: relative;
+        .QRcode {
+            position: absolute;
+            top: -5px;
+            right: 75px;
+            z-index: 10;
+            width: 100px;
+        }
+    }
+}
