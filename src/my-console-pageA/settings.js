@@ -1,7 +1,6 @@
 
 export const searchPage = {
     createFormItems: (data = []) => {
-        const institution = data[0]
         return [
             {
                 label: '用户名称',

@@ -64,10 +64,7 @@ const SearchPage = (props: SearchPageProps) => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [loading, setLoading] = useState(true);
     const hasFormItems = createFormItems()?.length > 0;
-    const [QRcodeImg, setQRcodeImg] = useState({
-        activeIndex: -1,
-        data: ''
-    })
+
     const createColumns = () => {
         const operatorColumn = {
             title: '操作',
